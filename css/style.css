@@ -1,0 +1,33 @@
+/* Put your CSS here */
+
+
+.menu {
+  width:60%;  
+  left: -60%;
+  position: fixed;
+  height:100%;
+  background-color: #47a3da;
+  padding: 0px;
+  box-shadow: -3px 3px 3px #ddd;
+}
+
+.menu.visible {
+  left: 0px;
+}
+
+.menu,
+body {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.push-right {
+	left: 60%;
+}
+
+body {
+	overflow-x: hidden;
+	position: relative;
+	left: 0;
+}

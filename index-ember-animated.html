@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ember Starter Kit</title>
+<link rel="stylesheet" href="css/ember-animated-outlet.css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!--  Application template -->
+	<script type="text/x-handlebars" id="old">
+   
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Podion</a>
+  </div>
+
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul class="nav navbar-nav">
+			<li class="active">
+				{{#link-to 'events'}}Programma{{/link-to}}
+			</li>
+			<li>
+				{{#link-to 'departements'}}Depts{{/link-to}}
+			</li>
+		</ul>
+	</div>
+</nav>
+{{outlet}}
+
+  </script>
+  
+  <script type="text/x-handlebars" id="events-bootstrap">
+<div style="position:relative">
+<ul class="list-group" data-role="menu">
+	{{#each}}
+	<li class="list-group-item">
+		<div class="row">
+			<div class="col-xs-4">
+				<img src="">
+			</div>
+			<div class="col-xs-8">
+				<a {{action goToEvent this}}>
+					{{title}}<br/>
+				{{date}}</a>
+
+				
+			</div>
+		</div>
+	</li>
+	{{/each}}
+</ul>
+{{animatedOutlet name="event"}}
+</div>
+</script>
+
+
+<script type="text/x-handlebars" id="events">
+<div style="position:relative">
+<ul>
+	{{#each}}
+	<li>
+		<a {{action goToEvent this}}>
+		{{title}}</a>
+	</li>
+	{{/each}}
+</ul>
+{{animatedOutlet name="events"}}
+</div>
+</script>
+
+
+<script type="text/x-handlebars" id="event">
+		<h1>{{title}}</h1>
+		{{date}}
+		<p>{{description}}</p>
+</script>
+
+
+
+<script type="text/x-handlebars" data-template-name='index'>
+  <p><a {{action sayHi}}> {{message}}</a></p>
+</script>
+
+<script type="text/x-handlebars" data-template-name='hi'>
+  <p><a {{action backToNormal}}>hello world!</a></p>
+</script>
+
+
+	<script src="js/libs/jquery-1.9.1.js"></script>
+	<script src="js/libs/handlebars-1.0.0.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="js/libs/ember-1.0.0.js"></script>
+	<script src="js/libs/ember-animated-outlet.js"></script>
+	<script src="js/libs/ember-fast-click.js"></script>
+	<script src="js/libs/ember-touch.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
