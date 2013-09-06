@@ -38,16 +38,21 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 // Wild card match for api/{ModelName}
-$app->get('/api/:name+', function ($items) use ($app) {
-	$event = $items[0]::all()->take(4);
-	echo $event->toJson();
+$app->get('/api/:name+', function ($items) use ($app)
+{
+	$name = rtrim($items[0], 's');
+	$model = ucfirst($name);
+	$event = $model::all();//->take(4);
+	$return = new stdClass;
+	$return->$name = $event->toArray();
+	//echo "<pre>";print_r($return);
+	echo json_encode($return);
 });
 
 // Define routes
 $app->get('/events', function () use ($app) {
 	//$event = \Event::where('id', '<>', 1 )->take(2)->get();
 	$event = \Event::all()->take(4);
-	echo "<pre>";print_R($event);
 	echo $event->toJson();
 });
 

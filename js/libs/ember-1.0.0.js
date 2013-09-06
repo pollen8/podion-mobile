@@ -1,7 +1,6 @@
 // Version: v1.0.0
 // Last commit: e2ea0cf (2013-08-31 23:47:39 -0700)
 
-
 (function() {
 /*global __fail__*/
 

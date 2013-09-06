@@ -1,12 +1,13 @@
+// Ember application
 App = Ember.Application.create();
 
-App.Store = DS.Store.extend({
-	url: "http://localhost/podion-mobile/fabrik4/public/api/"
-});
+// Ember data
+App.Store = DS.Store.extend({});
 
-
-DS.RESTAdapter.reopen({
-  url: '/podion-mobile/fabrik4/public/api/'
+// Set the name space
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+	host: 'http://localhost/podion-mobile',
+	namespace: 'fabrik4/public/api'
 });
 
 App.Event = DS.Model.extend({
@@ -16,10 +17,13 @@ App.Event = DS.Model.extend({
 	date_time: DS.attr('date')
 });
 
+
 //Define urls
 App.Router.map(function () {
 	this.resource('events', function () {
-		this.resource('event', {path: ':id'});
+		
+		// Nested resource inside events route
+		this.resource('event', {path: ':id'}); 
 	});
 });
 
@@ -33,6 +37,11 @@ App.ApplicationController = Em.Controller.extend({
 		}
 		$('body').removeClass('push-right');
 	}
+});
+
+//create Ember.ArrayController
+App.EventsIndexController = Ember.ArrayController.extend({
+  content: []
 });
 
 // Routes
@@ -64,11 +73,12 @@ App.EventRoute = Ember.Route.extend({
 });
 
 App.EventsIndexRoute = Ember.Route.extend({
+	 
 	model: function () {
-		// return this.store.findAll('event');
-		return App.Event.findAll();
-		return [];
-		//return events;
+		console.log('model');
+		// Query Ember data to get all events.
+		var store = this.get('store');
+		return store.findAll('event');
 	}
 });
 
@@ -99,21 +109,4 @@ for (var i = 0; i < 200; i ++) {
 	});
 	
 }
-/*var events = [{
-	id: '1',
-	title: 'atomic jam',
-	date: new Date('12-27-2013'),
-	image: '/images/test2.png',
-	description: 'blab bhab'
-},
-{
-	id: '2',
-	title: 'ultimate orange',
-	date: new Date('12-17-2013'),
-	image: '/images/test.png',
-	description: 'blab bhab'
-}   
-];*/
-
-
 
