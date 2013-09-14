@@ -1,0 +1,26 @@
+<header id="header" class="navbar navbar-inverse">
+	<a {{action toggleMenu}}>
+    	Menu
+	</a>
+</header>
+<section id="content">
+	<div class="main container">
+		<div class="row">	
+			<div class="col">
+				<div class="clearfix">
+					<h4>Events</h4>
+				</div>
+				<div class="list-group m-b-small">
+					{{#each}}
+					<div class="list-group-item">
+						{{#link-to 'event' this}}{{Event_title}}{{/link-to}}
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<aside {{bind-attr class="controller.detailsVisible:visible"}}>
+	{{outlet}}
+</aside>
