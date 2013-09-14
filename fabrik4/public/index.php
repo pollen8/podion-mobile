@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+require 'setheaders.php';
 
 // Prepare app
 $app = new \Slim\Slim();
@@ -23,6 +24,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 $capsule = new Capsule;
 
 $capsule->addConnection($settings);
+
 // Set the event dispatcher used by Eloquent models... (optional)
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
@@ -37,26 +39,37 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
-// Wild card match for api/{ModelName}
+// String inflector
+use ICanBoogie\Inflector;
+
+/*
+ * Wild card match for api/{ModelName}
+ * DB Models are auto-loaded via composer, if you add a new model you need to do:
+ *
+ * > php composer.phar install
+ *
+ * For it to be loaded
+ */
 $app->get('/api/:name+', function ($items) use ($app)
 {
-	$name = rtrim($items[0], 's');
+	$inflector = Inflector::get();
+	$name = $inflector->singularize($items[0]);
+
 	$model = ucfirst($name);
 	$event = $model::all();//->take(4);
 	$return = new stdClass;
+
+	// Format to Ember data expected format
 	$return->$name = $event->toArray();
-	//echo "<pre>";print_r($return);
 	echo json_encode($return);
 });
 
-// Define routes
+// Define routes - test example - can remove
 $app->get('/events', function () use ($app) {
 	//$event = \Event::where('id', '<>', 1 )->take(2)->get();
 	$event = \Event::all()->take(4);
 	echo $event->toJson();
 });
-
-
 
 // Run app
 $app->run();

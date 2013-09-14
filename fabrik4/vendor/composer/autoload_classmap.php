@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Act' => $baseDir . '/app/models/Act.php',
     'Event' => $baseDir . '/app/models/Event.php',
+    'ICanBoogie\\Inflections' => $vendorDir . '/icanboogie/inflector/lib/inflections.php',
+    'ICanBoogie\\Inflector' => $vendorDir . '/icanboogie/inflector/lib/inflector.php',
 );
