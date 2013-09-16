@@ -1,43 +1,13 @@
 <?php
 require '../vendor/autoload.php';
 require 'setheaders.php';
+require 'configuration.php';
 
 // Prepare app
 $app = new \Slim\Slim();
 
-// ORM Database
-
-// Database information
-$settings = array(
-		'driver' => 'mysql',
-		'host' => '127.0.0.1',
-		'database' => 'deveci_podion',
-		'username' => 'root',
-		'password' => '',
-		'collation' => 'utf8_general_ci',
-		'charset' => 'utf8'
-);
-
-
-use Illuminate\Database\Capsule\Manager as Capsule;
-
-$capsule = new Capsule;
-
-$capsule->addConnection($settings);
-
-// Set the event dispatcher used by Eloquent models... (optional)
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
-$capsule->setEventDispatcher(new Dispatcher(new Container));
-
-// Set the cache manager instance used by connections... (optional)
-//$capsule->setCacheManager(...);
-
-// Make this Capsule instance available globally via static methods... (optional)
-$capsule->setAsGlobal();
-
-// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-$capsule->bootEloquent();
+// DB ini
+require 'capsule.php';
 
 // String inflector
 use ICanBoogie\Inflector;
@@ -50,6 +20,8 @@ use ICanBoogie\Inflector;
  *
  * For it to be loaded
  */
+
+
 $app->get('/api/:name+', function ($items) use ($app)
 {
 	$inflector = Inflector::get();
