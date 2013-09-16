@@ -4,10 +4,11 @@ App.ApplicationRoute = Ember.Route.extend({
 			this.controller.toggleProperty('menuVisible');
 			this.controller.pushBody();
 		},
-		toggleDetails: function () {
-			console.log('toggleDetails in applicaton route');
+		toggleDetails: function (id) {
+			this.controller.set('previousDetailsId', this.controller.get('detailsId'));
+			this.controller.set('detailsId', id);
 			this.controller.toggleProperty('detailsVisible');
-			this.controller.pushBody();
+			this.controller.toggleDetails();
 		},
 		
 		// Not used (were part of animated outlet)
