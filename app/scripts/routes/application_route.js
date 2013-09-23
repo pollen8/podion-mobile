@@ -5,6 +5,7 @@ App.ApplicationRoute = Ember.Route.extend({
 			this.controller.pushBody();
 		},
 		toggleDetails: function (id) {
+			console.log('app route toggle details', id);
 			this.controller.set('previousDetailsId', this.controller.get('detailsId'));
 			this.controller.set('detailsId', id);
 			this.controller.toggleProperty('detailsVisible');

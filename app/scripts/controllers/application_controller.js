@@ -24,7 +24,7 @@ App.ApplicationController = Em.Controller.extend({
 	toggleDetails: function () {
 		console.log(this.detailsId);
 		if (this.detailsId === this.previousDetailsId) {
-			return;
+			//return;
 		}
 		if (this.get('detailsVisible')) {
 			return $('aside').addClass('push-left');

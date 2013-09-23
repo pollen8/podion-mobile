@@ -1,1 +1,7 @@
 <h1>{{name_act_nl}}</h1>
+{{#if isEditing}}
+{{partial 'act_edit'}}
+<button class="btn" {{action doneEditing}}>Done</button>
+{{else}}
+<button class="btn" {{action edit}}>Edit</button>
+{{/if}}

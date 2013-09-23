@@ -1,6 +1,6 @@
 App.Event = DS.Model.extend({
-	Event_title: DS.attr('string'),
-	Flyer: DS.attr('string'),
-	Event_description_short: DS.attr('string'),
+	title: DS.attr('string'),
+	flyer: DS.attr('string'),
+	description: DS.attr('string'),
 	date_time: DS.attr('date')
 });
